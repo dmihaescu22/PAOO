@@ -21,7 +21,7 @@ public:
     Book(Book&& other) noexcept;
 
     Book& operator=(const Book& other); 
-    Book& operator=(Book&& other) noexcept;
+    Book& operator=(Book&& other) noexcept; 
 
     Book& operator=(int) = delete; 
     Book(int) = delete; 

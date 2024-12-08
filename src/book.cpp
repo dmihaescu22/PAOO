@@ -28,18 +28,18 @@ Book::Book(Book&& other) noexcept {
 }
 
 Book& Book::operator=(const Book& other) {
-    if (this != &other) {
+    if (this != &other) { 
         delete this->author;
         this->title = other.title;
-        this->author = new std::string(*other.author);
+        this->author = new std::string(*other.author); 
         this->year = other.year;
     }
-    std::cout << "Book copy assignment operator called for: " << this->title << std::endl; 
-    return *this;
+    std::cout << "Book copy assignment operator called for: " << this->title << std::endl;
+    return *this; 
 }
 
 Book& Book::operator=(Book&& other) noexcept {
-    if (this != &other) {
+    if (this != &other) { 
         delete this->author;
         this->title = std::move(other.title);
         this->author = other.author;
@@ -47,7 +47,7 @@ Book& Book::operator=(Book&& other) noexcept {
         other.author = nullptr;
     }
     std::cout << "Book move assignment operator called for: " << this->title << std::endl;
-    return *this;
+    return *this; 
 }
 
 void Book::display() const {
