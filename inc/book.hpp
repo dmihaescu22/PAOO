@@ -3,12 +3,20 @@
 
 #include <string>
 #include <iostream>
-#include <memory> // #14
+#include <memory>
+
+class ResourceDeleter {
+public:
+    void operator()(std::string* ptr) {
+        std::cout << "Custom deleter called for allocated resource\n";
+        delete ptr;
+    }
+};
 
 class Book {
 private:
     std::string title;
-    std::shared_ptr<std::string> author; // #13
+    std::shared_ptr<std::string> author;
     int year;
 
 public:
@@ -18,14 +26,11 @@ public:
 
     ~Book();
 
-    Book(const Book& other);
-    Book(Book&& other) noexcept;
+    Book(const Book& other) = delete;       // Blocat
+    Book(Book&& other) noexcept = delete;   // Blocat
 
-    Book& operator=(const Book& other);
-    Book& operator=(Book&& other) noexcept;
-
-    Book& operator=(int) = delete;
-    Book(int) = delete;
+    Book& operator=(const Book& other) = delete; // Blocat
+    Book& operator=(Book&& other) noexcept = delete; // Blocat
 
     void display() const;
 };
